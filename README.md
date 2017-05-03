@@ -22,3 +22,18 @@ In home, do coding !
 #   The capital of China is Beijing.
 #
 #   目前不需要做到，解析多个文件，以及文件内容包含特殊字符，只需要以空格，逗点，句点，叹号为分割的单词既可以。
+#
+#	./a.out file1
+#   运行程序，输出结果为：
+#
+#	Input file name: d://demo.txt
+#	line   words  chars
+#	1      7      26
+#	2      7      39
+#	3      7      33
+#	4      6      27
+#	5      0      0
+#	6      2      7
+#	7      0      0
+#	8      1      10
+#	Total: 8 lines, 30 words, 142 chars
