@@ -2,17 +2,17 @@
 #include <stdlib.h>
 
 #define BUFSIZE 1024
-#define TEST
+
+typedef enum{false, true} bool;
 
 int main(int argc, char **argv)
 {
 	FILE *fp = NULL;
 	char *buf = (char *)malloc(sizeof(char) * BUFSIZE);
-	int index = 0;
+	int i = 0;
+	int alpha = 0, word = 0, line = 0;
+	bool head = true;
 
-#ifdef TEST
-	static int i = 0;
-#endif
 	/*do with 通配符 * , 以及多个文件*/
 	if (argc < 2) {
 		fprintf(stderr, "argc err\n");
@@ -26,21 +26,28 @@ int main(int argc, char **argv)
 		goto fail0;
 	}
 
-	while (!feof(fp)) {
-		fgets(buf, BUFSIZE, fp);
-#ifdef TEST
-		printf("[line%d] =%s\n", i, buf);
-		i++;
-#endif
-		/*buf 的组成表现为"hello world\n\0",可以通过hex十六进制方式打开  参考如下
-		 *http://blog.csdn.net/npjocj/article/details/7311394
-		 *当初Android系统下的文本编辑器打开windows文档出现问题，就是通过\r\n-->\n解的
-		*/
-
-		/*玩游戏，明日搞*/
-		for (; buf[index]) {
-
+	printf("%-9s%-9s%-9s\n", "line", "word", "alpha");
+	while (fgets(buf, BUFSIZE, fp) != NULL) {
+		for (; buf[i] != '\n'; i++) {
+			if (isalpha(buf[i]) || ispunct(buf[i])) {
+				head = false;
+				alpha++;
+			} else if ((isspace(buf[i])||ispunct(buf[i])) && head == false) {
+				word++;
+			} else if (isspace(buf[i]) && head == true) {
+				continue;
+			}
 		}
+		line++;
+		if (!ispunct(buf[i - 1])) {
+			word++;//一行结束都算作一个单词，这是在不考虑单词占据两行的情况下
+		}
+
+		printf("%-9d%-9d%-9d\n", line, word, alpha);
+		word = 0;
+		alpha = 0;
+		head = true;
+		i = 0;
 	}
 
 fail0:
