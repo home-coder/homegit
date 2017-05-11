@@ -24,6 +24,7 @@ In home, do coding !
 #   The capital of China is Beijing.
 #
 #   目前不需要做到，解析多个文件，以及文件内容包含特殊字符，只需要以空格，逗点，句点，叹号为分割的单词既可以。
+#   目前不需要支持opt参数如 -l :"line" -c -w 等等 
 #
 #	./a.out file1
 #   运行程序，输出结果为：
