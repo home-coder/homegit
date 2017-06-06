@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 			word++;//一行结束都算作一个单词，这是在不考虑单词占据两行的情况下
 		}
 
-		printf("%-9d%-9d%-9d\n", line, word, alpha);
+		printf("%-9d%-9d%-9d\n\n", line, word, alpha);
 		word = 0;
 		alpha = 0;
 		head = true;
